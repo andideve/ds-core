@@ -14,18 +14,22 @@ const styles = (theme: Theme) => ({
   },
   body: {
     fontFamily: theme.fonts.sans,
-    color: 'var(--ds-colors-foreground-primary)',
-    backgroundColor: 'var(--ds-colors-background-primary)',
+    color: theme.colors.foreground.primary,
+    backgroundColor: theme.colors.background.primary,
   },
 });
 
-function GlobalStyles() {
+function GlobalStyles({ injectCSSVars }: { injectCSSVars?: boolean }) {
   return (
     <>
       <CSSReset />
-      <Global
-        styles={(theme) => ({ ':root': toCSSVars(theme, { prefix: 'ds', omitKeys: ['config'] }) })}
-      />
+      {injectCSSVars && (
+        <Global
+          styles={(theme) => ({
+            ':root': toCSSVars(theme, { prefix: 'ds', omitKeys: ['config'] }),
+          })}
+        />
+      )}
       <Global styles={(theme) => styles(theme as Theme)} />
     </>
   );

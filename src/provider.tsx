@@ -34,15 +34,17 @@ function genTheme(themeConfig?: Partial<ThemeConfig>) {
 export function Provider({
   children,
   themeConfig,
+  injectCSSVars = true,
 }: {
   children?: React.ReactNode;
   themeConfig?: Partial<ThemeConfig>;
+  injectCSSVars?: boolean;
 }) {
   const theme = useMemo(() => genTheme(themeConfig), [themeConfig]);
   return (
     <CacheProvider value={createCache({ key: 'ds' })}>
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
+        <GlobalStyles injectCSSVars={injectCSSVars} />
         {children}
       </ThemeProvider>
     </CacheProvider>

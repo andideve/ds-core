@@ -25,4 +25,5 @@ Example.args = {
   themeConfig: {
     colorMode: 'dark',
   },
+  injectCSSVars: true,
 };
